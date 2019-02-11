@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        Eloquent::unguard();
+
+        $this->call(UsersTableSeeder::class);
+        $this->call(MarcasTableSeeder::class);
+        $this->call(FabricantesTableSeeder::class);
+        $this->call(ProdutosTableSeeder::class);
+
+        Eloquent::reguard();
     }
 }

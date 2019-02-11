@@ -10,5 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', 'PerformanceController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('performances', 'PerformanceController');
+
+Route::resource('marcas', 'MarcaController');
+Route::resource('fabricantes', 'FabricanteController');
+Route::resource('produtos', 'ProdutoController');

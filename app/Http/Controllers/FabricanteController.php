@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Fabricante;
 use Illuminate\Http\Request;
 
-class PerformanceController extends Controller
+class FabricanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        return view('performances.index');
+        $fabricantes = Fabricante::all();
+        
+        return view('fabricantes.index', compact('fabricantes'));
     }
 
     /**
@@ -23,7 +26,7 @@ class PerformanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('fabricantes.create');
     }
 
     /**
@@ -34,7 +37,13 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required'
+        ]);
+
+        Fabricante::create($request->all());
+
+        return redirect()->route('fabricantes.index')->with('success','Fabricante criado com sucesso.');
     }
 
     /**
@@ -45,7 +54,9 @@ class PerformanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $fabricante = Fabricante::find($id);
+
+        return view('fabricantes.show', compact('fabricante'));
     }
 
     /**
@@ -56,7 +67,9 @@ class PerformanceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fabricante = Fabricante::find($id);
+
+        return view('fabricantes.edit', compact('fabricante'));
     }
 
     /**
@@ -68,7 +81,15 @@ class PerformanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required'
+        ]);
+
+        $fabricante = Fabricante::find($id);
+        $fabricante->nome = $request->get('nome');
+        $fabricante->save();
+
+        return redirect('/fabricantes')->with('success', 'Fabricante Alterada com sucesso.');
     }
 
     /**
@@ -79,6 +100,9 @@ class PerformanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fabricante = Fabricante::find($id);
+        $fabricante->delete();
+        
+        return redirect('/fabricantes')->with('success', 'Fabricante excluído com sucesso.');
     }
 }

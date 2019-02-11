@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Marca;
 use Illuminate\Http\Request;
 
-class PerformanceController extends Controller
+class MarcaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        return view('performances.index');
+        $marcas = Marca::all();
+
+        return view('marcas.index', compact('marcas'));
     }
 
     /**
@@ -23,7 +26,7 @@ class PerformanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('marcas.create');
     }
 
     /**
@@ -34,7 +37,13 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required'
+        ]);
+
+        Marca::create($request->all());
+
+        return redirect()->route('marcas.index')->with('success','Marca criada com sucesso.');
     }
 
     /**
@@ -45,7 +54,9 @@ class PerformanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $marca = Marca::find($id);
+
+        return view('marcas.show', compact('marca'));
     }
 
     /**
@@ -56,7 +67,9 @@ class PerformanceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $marca = Marca::find($id);
+
+        return view('marcas.edit', compact('marca'));
     }
 
     /**
@@ -68,7 +81,15 @@ class PerformanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nome' => 'required'
+        ]);
+
+        $marca = Marca::find($id);
+        $marca->nome = $request->get('nome');
+        $marca->save();
+
+        return redirect('/marcas')->with('success', 'Marca Alterada com sucesso.');
     }
 
     /**
@@ -79,6 +100,9 @@ class PerformanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $marca = Marca::find($id);
+        $marca->delete();
+
+        return redirect('/marcas')->with('success', 'Marca excluída com sucesso.');
     }
 }

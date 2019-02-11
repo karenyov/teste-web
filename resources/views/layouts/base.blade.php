@@ -10,11 +10,11 @@
 <div class="page">
     <div class="container">
 
-        <div id="main" class="row">
-
-            @yield('content')
-
+        <div class="page-title">
+            <h1>@yield('title')</h1>
         </div>
+
+        @yield('content')
 
         <footer class="row">
             @include('includes.footer')
