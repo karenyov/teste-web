@@ -19,6 +19,7 @@ DB_PASSWORD=secret
 
 ## Instalação
 - Instalar as dependências via composer: `composer install`
+- Gerar Key: `php artisan key:generate`
 - Executar as migrations: `php artisan migrate`
 - Executar seeds: `php artisan db:seed`
 
