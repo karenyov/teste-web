@@ -5,12 +5,6 @@
 - [MySQL](https://www.mysql.com/).
 - [Composer](https://getcomposer.org/).
 
-
-## Instalação
-- Instalar as dependências via composer: `composer install`
-- Executar as migrations: `php artisan migrate`
-- Executar seeds: `php artisan db:seed`
-
 ### Configuração
 Todas as configurações necessárias são feitas do arquivo ".env", localizado na raíz do projeto. 
 
@@ -22,6 +16,11 @@ DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
+
+## Instalação
+- Instalar as dependências via composer: `composer install`
+- Executar as migrations: `php artisan migrate`
+- Executar seeds: `php artisan db:seed`
 
 ## Login
 Para teste é inserido um usuário no banco de dados:
