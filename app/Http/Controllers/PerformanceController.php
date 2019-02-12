@@ -15,7 +15,9 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        return view('performances.index');
+        $performances = Performance::getAllPerformances();
+
+        return view('performances.index', compact('performances'));
     }
 
     /**
@@ -58,7 +60,10 @@ class PerformanceController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $performance = Performance::getPerformancesByProdutoId($id);
+
+        return view('performances.show', compact('performance'));
     }
 
     /**
@@ -93,14 +98,5 @@ class PerformanceController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function export_pdf()
-    {
-        $data = Performance::get();
-        $pdf = PDF::loadView('pdf.performances', $data);
-        $pdf->save(storage_path().'_filename.pdf');
-
-        return $pdf->download('performances.pdf');
     }
 }

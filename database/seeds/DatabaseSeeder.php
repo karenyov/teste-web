@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MarcasTableSeeder::class);
         $this->call(FabricantesTableSeeder::class);
         $this->call(ProdutosTableSeeder::class);
-       // $this->call(PerformanceTableSeeder::class);
+        $this->call(PerformanceTableSeeder::class);
 
         Eloquent::reguard();
     }

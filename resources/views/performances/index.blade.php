@@ -26,16 +26,32 @@
             </tr>
         </thead>
         <tbody>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="width: 30px;"><a href="" class="btn btn-info btn-sm"><i class="fa fa-search"></i></a></td>
+            @foreach ($performances as $performance)
+                <tr>
+                    <td>{{ $performance->produto_id }}</td>
+                    <td>{{ $performance->produto }}</td>
+                    <td>{{ $performance->fabricante }}</td>
+                    <td>{{ $performance->marca }}</td>
+                    <td>{{ $performance->incidencia }}</td>
+                    <td>{{ $performance->vitoria }}</td>
+                    <td>R$ {{ number_format($performance->nossa_media, 2, ',', '.') }}</td>
+                    <td>R$ {{ number_format($performance->media_concorrencia, 2, ',', '.') }}</td>
+                    <td style="text-align: center; padding:10px;">
+                        <h5>
+                            @if ($performance->diferenca >= 0)
+                                <span style="padding:5px; color: white; background-color: #60c560">
+                            @elseif ($performance->diferenca < 0 && $performance->diferenca >= -20)        
+                                <span style="padding:5px; color: white; background-color: #FFD700">
+                            @else
+                                <span style="padding:5px; color: white; background-color: #FF0000">
+                            @endif
+                                <strong>{{ $performance->diferenca }}%</strong>
+                            </span>
+                        </h5>
+                    </td>
+                    <td style="width: 30px;"><a href="{{ route('performances.show', $performance->produto_id)}}" class="btn btn-info btn-sm"><i class="fa fa-search"></i></a></td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

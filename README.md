@@ -28,4 +28,5 @@ Para teste é inserido um usuário no banco de dados:
 Email: admin@email.com
 Senha: secret
 
- 
+## Testes
+- Executar todos os testes: `.\vendor\bin\phpunit`
