@@ -12,6 +12,7 @@
             <p class="card-text">
                 <b>Id: </b> {{ $produto->id }} <br>
                 <b>Descrição: </b> {{ $produto->descricao }} <br>
+                <b>Preço: </b> R$ {{ number_format($produto->preco, 2, ',', '.') }} <br>
                 <b>Marca: </b> <a href="{{ route('marcas.show', $produto->marca_id)}}">{{ $produto->marca->nome }} </a> <br>
                 <b>Fabricante: </b> <a href="{{ route('fabricantes.show', $produto->fabricante_id)}}">{{ $produto->fabricante->nome }}</a>
             </p>

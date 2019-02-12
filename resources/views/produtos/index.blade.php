@@ -13,10 +13,11 @@
     <table class="table" id="table-produtos">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Fabricante</th>
+                <th scope="col">Preço</th>
                 <th>Consultar</th>
                 <th >Editar</th>
                 <th>Excluir</th>
@@ -27,6 +28,7 @@
                 <tr>
                     <td>{{ $produto->id }}</td>
                     <td>{{ $produto->descricao }}</td>
+                    <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                     <td>{{ $produto->marca->nome }}</td>
                     <td>{{ $produto->fabricante->nome }}</td>
                     <td style="width: 30px;"><a href="{{ route('produtos.show', $produto->id)}}" class="btn btn-info btn-sm"><i class="fa fa-search"></i></a></td>
@@ -57,6 +59,7 @@
                                         null,
                                         null, 
                                         null, 
+                                        null,
                                         null],
                         "aaSorting": [],
                         select: {

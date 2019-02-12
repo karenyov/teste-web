@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Performance;
+use App\Produto;
 use Illuminate\Http\Request;
 
 class PerformanceController extends Controller
@@ -23,7 +25,9 @@ class PerformanceController extends Controller
      */
     public function create()
     {
-        //
+        $produtos = Produto::all();
+
+        return view('performances.create', ['produtos' => $produtos]);
     }
 
     /**
@@ -34,7 +38,16 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'preco_concorrencia' => 'required',
+            'produto_id' => 'required'
+        ]);
+
+        $request['preco_concorrencia'] = str_replace(",", ".", str_replace(".", "", $request->get('preco_concorrencia')));
+
+        Performance::create($request->all());
+
+        return redirect()->route('performances.index')->with('success','Performance criado com sucesso.');
     }
 
     /**
@@ -80,5 +93,14 @@ class PerformanceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function export_pdf()
+    {
+        $data = Performance::get();
+        $pdf = PDF::loadView('pdf.performances', $data);
+        $pdf->save(storage_path().'_filename.pdf');
+
+        return $pdf->download('performances.pdf');
     }
 }

@@ -22,6 +22,10 @@
                 <input type="text" class="form-control" placeholder="Descrição" name="descricao">
             </div>
             <div class="form-group">
+                <label for="preco">Preço</label>
+                <input type="text" class="form-control" placeholder="Preço" name="preco" id="preco">
+            </div>
+            <div class="form-group">
                 <label for="marca">Marca</label>
                 <select class="form-control" name="marca_id">
                     <option value="">Selecione a Marca</option>
@@ -43,5 +47,14 @@
         </form>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $('#preco').maskMoney({
+            decimal: ",",
+            thousands: "."
+        });
+    })
+</script>
 
 @endsection

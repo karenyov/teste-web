@@ -28,7 +28,6 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        $produtos = Produto::all();
         $fabricantes = Fabricante::all();
         $marcas = Marca::all();
 
@@ -46,8 +45,11 @@ class ProdutoController extends Controller
         $request->validate([
             'descricao' => 'required',
             'marca_id' => 'required',
-            'fabricante_id' => 'required'
+            'fabricante_id' => 'required',
+            'preco' => 'required'
         ]);
+
+        $request['preco'] = str_replace(",", ".", str_replace(".", "", $request->get('preco')));
 
         Produto::create($request->all());
 
@@ -101,6 +103,7 @@ class ProdutoController extends Controller
         $produto->descricao = $request->get('descricao');
         $produto->fabricante_id = $request->get('fabricante_id');
         $produto->marca_id = $request->get('marca_id');
+        $produto->preco = str_replace(",", ".", str_replace(".", "", $request->get('preco')));
         $produto->save();
 
         return redirect('/produtos')->with('success', 'Produto Alterado com sucesso.');

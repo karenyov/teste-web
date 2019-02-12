@@ -12,10 +12,13 @@
 */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('performances', 'PerformanceController');
+    Route::resource('marcas', 'MarcaController');
+    Route::resource('fabricantes', 'FabricanteController');
+    Route::resource('produtos', 'ProdutoController');
+});
 
-Route::resource('performances', 'PerformanceController');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('marcas', 'MarcaController');
-Route::resource('fabricantes', 'FabricanteController');
-Route::resource('produtos', 'ProdutoController');
+

@@ -18,6 +18,7 @@ class CreateProdutosTable extends Migration
             $table->string('descricao');
             $table->unsignedInteger('marca_id');
             $table->unsignedInteger('fabricante_id');
+            $table->float('preco', 20, 4);	
             $table->timestamps();
 
             //fks

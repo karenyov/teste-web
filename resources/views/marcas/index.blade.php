@@ -13,7 +13,7 @@
     <table class="table" id="table-marcas">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th>Consultar</th>
                 <th>Editar</th>

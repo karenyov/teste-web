@@ -5,9 +5,10 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  @if (Auth::check())
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item {{Request::path() == 'performance' ? 'active' : ''}}">
+      <li class="nav-item {{Request::path() == 'performances' ? 'active' : ''}}">
         <a class="nav-link"  href="{{ url('/performances') }}">Performance <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item {{Request::path() == 'produtos' ? 'active' : ''}}">
@@ -21,6 +22,7 @@
       </li>
     </ul>
   </div>
+  @endif
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
     <ul class="navbar-nav ml-auto">
 

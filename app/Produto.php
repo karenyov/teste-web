@@ -8,7 +8,7 @@ class Produto extends Model
 {
     protected $table = 'produtos';
 
-    protected $fillable = ['descricao', 'fabricante_id', 'marca_id'];
+    protected $fillable = ['descricao', 'fabricante_id', 'marca_id', 'preco'];
     protected $guarded = ['id', 'created_at', 'update_at'];
 
     public function fabricante()
@@ -19,5 +19,10 @@ class Produto extends Model
     public function marca()
     {
         return $this->belongsTo('App\Marca');
+    }
+
+    public function performances()
+    {
+        return $this->hasMany('App\Performance');
     }
 }
