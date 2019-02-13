@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Marca;
 use Illuminate\Http\Request;
+use Freshbitsweb\Laratables\Laratables;
 
 class MarcaController extends Controller
 {
@@ -104,5 +105,15 @@ class MarcaController extends Controller
         $marca->delete();
 
         return redirect('/marcas')->with('success', 'Marca excluída com sucesso.');
+    }
+
+    /**
+     * Retorna as marcas em formato json
+     *
+     * @return json
+     */
+    public function getMarcaDatatablesData () 
+    {
+        return Laratables::recordsOf(Marca::class);
     }
 }

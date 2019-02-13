@@ -15,28 +15,9 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
-                <th>Consultar</th>
-                <th>Editar</th>
-                <th>Excluir</th>
+                <th>Ações</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach ($fabricantes as $fabricante)
-                <tr>
-                    <td>{{ $fabricante->id }}</td>
-                    <td>{{ $fabricante->nome }}</td>
-                    <td style="width: 30px;"><a href="{{ route('fabricantes.show', $fabricante->id)}}" class="btn btn-info btn-sm"><i class="fa fa-search"></i></a></td>
-                    <td style="width: 30px;"><a href="{{ route('fabricantes.edit', $fabricante->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"></i></a></td>
-                    <td style="width: 30px;">
-                        <form action="{{ route('fabricantes.destroy', $fabricante->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash-o"></i></button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
     </table>
 
 </div>
@@ -45,18 +26,17 @@
     $(document).ready(function () {
         $('#table-fabricantes')
             .DataTable({
-                        bAutoWidth: false,
-                         "aoColumns": [
-                                        null,
-                                        null,
-                                        null,
-                                        null,
-                                        null],
-                        "aaSorting": [],
-                        select: {
-                            style: 'multi'
-                        }
-                    });
+                serverSide: true,
+                processing: true,
+                responsive: true,
+                bAutoWidth: false,
+                ajax: "{{ route('fabricante_datatables_data') }}",
+                        columns: [
+                            { name: 'id' },
+                            { name: 'nome' },
+                            { name: 'action', orderable: false, searchable: false }
+                        ],
+            });
     });
 </script>
 

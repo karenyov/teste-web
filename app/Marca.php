@@ -15,4 +15,15 @@ class Marca extends Model
     {
         return $this->hasMany('App\Produto');
     }
+
+    /**
+     * Retorna o html para a coluna ações
+     *
+     * @param [type] $marca
+     * @return void
+     */
+    public static function laratablesCustomAction($marca)
+    {
+        return view('marcas.includes.action', ['marca' => $marca])->render();
+    }
 }

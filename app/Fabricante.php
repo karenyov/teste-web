@@ -15,4 +15,15 @@ class Fabricante extends Model
     {
         return $this->hasMany('App\Produto');
     }
+
+    /**
+     * Retorna o html para a coluna ações
+     *
+     * @param [type] $fabricante
+     * @return void
+     */
+    public static function laratablesCustomAction($fabricante)
+    {
+        return view('fabricantes.includes.action', ['fabricante' => $fabricante])->render();
+    }
 }

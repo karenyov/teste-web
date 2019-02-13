@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Fabricante;
 use Illuminate\Http\Request;
+use Freshbitsweb\Laratables\Laratables;
 
 class FabricanteController extends Controller
 {
@@ -104,5 +105,15 @@ class FabricanteController extends Controller
         $fabricante->delete();
         
         return redirect('/fabricantes')->with('success', 'Fabricante excluído com sucesso.');
+    }
+
+    /**
+     * Retorna os fabricantes em formato json
+     *
+     * @return json
+     */
+    public function getFabricanteDatatablesData () 
+    {
+        return Laratables::recordsOf(Fabricante::class);
     }
 }
